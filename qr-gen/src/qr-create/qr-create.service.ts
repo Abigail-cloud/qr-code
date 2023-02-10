@@ -6,6 +6,7 @@ import { createRequire } from 'module';
 import { PrismaService } from 'prisma/prisma.service';
 import { qrDto } from './dto/qr-create.dto';
 import * as qrcode from 'qrcode';
+import { ZXingScannerModule, ZXingScannerComponent } from '@zxing/ngx-scanner';
 
 
 @Injectable()
@@ -26,6 +27,7 @@ export class QrCreateService {
     }
 
     async qrScan () {
+        ZXingScannerComponent;
         return " "
     }
 
