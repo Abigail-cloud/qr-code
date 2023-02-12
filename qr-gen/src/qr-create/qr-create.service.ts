@@ -7,7 +7,8 @@ import { PrismaService } from 'prisma/prisma.service';
 import { qrDto } from './dto/qr-create.dto';
 import * as qrcode from 'qrcode';
 import * as fs from 'fs';
-import * as qrScan from 'qrcode-reader';
+import Jimp from "jimp";
+import jsqrcode from "jsqrcode";
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -32,17 +33,23 @@ export class QrCreateService {
   }
     }
 
-async qrScan (qrCodeImage: any): Promise<string>{
-    const qr = new qrScan();
-    return new Promise((resolve, reject) => {
-      qr.callback = function (err: any, value: { result: string | PromiseLike<string>; }) {
-        if (err) {
-          reject(err);
-        }
-        resolve(value.result);
-      };
-      qr.decode(qrCodeImage);
+async qrScan (){
+    await Jimp.read('./public/image/qr_code.png')
+  .then(image => {
+    const buffer = image.getBufferAsync(Jimp.MIME_PNG);
+    const width = image.bitmap.width;
+    const height = image.bitmap.height;
+    jsqrcode.decode(buffer, width, height, function(err: any, data: any) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(data);
+      }
     });
+  })
+  .catch(err => {
+    console.error(err);
+  });
     }
 
 
@@ -71,7 +78,7 @@ async qrScan (qrCodeImage: any): Promise<string>{
       }
 
       async storeQRCode(qrCode: string | NodeJS.ArrayBufferView) {
-        fs.writeFileSync(`qr_code.png`, qrCode);
+        fs.writeFileSync(`./public/image/qr_code.png`, qrCode);
       }
             
 }
