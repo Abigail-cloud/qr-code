@@ -16,7 +16,7 @@ export class QrCreateController {
   }
 
   @Post('qrScan')
-  qrScan(){
-    return  this.qrCreateService.qrScan()
+  qrScan(qrCodeImage: any){
+    return  this.qrCreateService.qrScan(qrCodeImage)
   }
 }

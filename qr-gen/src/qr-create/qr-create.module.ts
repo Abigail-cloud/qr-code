@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { QrCreateService } from './qr-create.service';
 import { QrCreateController } from './qr-create.controller';

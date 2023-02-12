@@ -9,11 +9,10 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-
 model QrCode {
-  id String @unique @default(uuid())
-  text String
-  createdAt DateTime @default(now()) 
-  updatedAt DateTime @updatedAt()
+  id        String     @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  image   String?
 }

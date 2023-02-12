@@ -1,9 +1,10 @@
 -- CreateTable
 CREATE TABLE "QrCode" (
     "id" TEXT NOT NULL,
-    "text" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "title" TEXT NOT NULL,
+    "image" TEXT
 );
 
 -- CreateIndex
